@@ -20,5 +20,5 @@ def main(file):
   print(sm)
     
 
-
-main('./data.txt')
+if __name__=='__main__':
+  main('./data1.txt')
