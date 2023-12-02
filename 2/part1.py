@@ -31,4 +31,5 @@ def main(file):
     print(s)
 
 
-main('./data.txt')
+if __name__ == '__main__':
+    main('data.txt')

@@ -15,7 +15,7 @@ def multiplier(entry):
         max_colour = max([int(c)
                           for c in re.findall(f'\d+(?= {colour})', entry)])
         multiplier *= max_colour
-    s += multiplier
+    return multiplier
 
 
 def main(file):
@@ -26,4 +26,5 @@ def main(file):
     print(s)
 
 
-main('data.txt')
+if __name__ == '__main__':
+    main('data.txt')
