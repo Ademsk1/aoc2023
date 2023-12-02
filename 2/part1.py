@@ -12,10 +12,9 @@ def get_set_sum(game):
     colours = ['red', 'green', 'blue']
     maximums = [12, 13, 14]
     for colour, maximum in zip(colours, maximums):
-        matches = re.findall(f'\d+ {colour}', game)
-        gt = any([int(re.findall('\d+', result)[0])
-                 > maximum for result in matches])
-        if gt:
+        invalid = [int(match) > maximum for match in re.findall(
+            f'\d+(?= {colour})', game)]
+        if any(invalid):
             return False
     return True
 
