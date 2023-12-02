@@ -8,7 +8,7 @@ def read(file):
     return rawdata
 
 
-def get_set_sum(game):
+def valid(game):
     colours = ['red', 'green', 'blue']
     maximums = [12, 13, 14]
     for colour, maximum in zip(colours, maximums):
@@ -25,7 +25,7 @@ def main(file):
     s = 0
     for entry in rawdata:
         id, game = entry.split(':')
-        if get_set_sum(game):
+        if valid(game):
             s += int(id.split(' ')[1])
 
     print(s)
