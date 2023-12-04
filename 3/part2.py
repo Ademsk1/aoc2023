@@ -19,22 +19,27 @@ def boundary(i, height, j, width, ib, jb):
 
 def wider_view_analysis(wider_views):
     """
-    After checking that the gear has two numbers adjacent to it, its 
-    necessary to get a wider view than the 3x3 in order to not miss any digits.
+   its necessary to get a wider view than the 3x3 in order to not miss any digits. Here we get a 5x3. Then we check that only two numbers are within the cog.  d
     """
     wider_above, wider_here, wider_below = wider_views
     multiplier = 1
+    counter = 0
     for row in [wider_above, wider_here, wider_below]:
         next_digits = re.search('\d+', row)
         jend = 0
         jstart = 0
+        
         while next_digits:
             jstart = jend + next_digits.start()
             jend += next_digits.end()
             if jstart < 5 and jend > 2:
                 multiplier *= int(next_digits.group())
+                counter +=1
             next_digits = re.search('\d+', row[jend:])
-    return multiplier
+    if counter == 2:
+      return multiplier
+    else:
+        return 0
 
 
 def main(file):
@@ -47,17 +52,7 @@ def main(file):
         for j, value in enumerate(entry):
             if value != '*':
                 continue
-            t, b, l, r = boundary(i, height, j, width, 1, 1)
-            above = rawdata[t][l:r+1]
-            here = rawdata[i][l:r+1]
-            below = rawdata[b][l:r+1]
-            total = 0
-            for row in [above, here, below]:
-                numbers = re.findall('\d+', row)
-                total += len(numbers)
-            if total != 2:
-                continue
-            _, _, wl, wr = boundary(i, height, j, width, 1, 3)
+            t, b, wl, wr = boundary(i, height, j, width, 1, 3)
             wider_view = [
                 rawdata[y][wl:wr+1] for y in [t, i, b]]
             gear_ratio_sum += wider_view_analysis(wider_view)
