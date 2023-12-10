@@ -1,7 +1,6 @@
 import re
 def read(file):
     rawdata = []
-    maps = []
     with open(file) as f:
         rawdata = f.readlines()
 
