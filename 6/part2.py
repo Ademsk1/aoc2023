@@ -12,6 +12,7 @@ def reformat_data(rawdata):
     data = [(times,distances)]
     return data
 
+
 def main(file):
     rawdata = read(file)
     data = reformat_data(rawdata)
