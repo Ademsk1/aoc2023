@@ -1,4 +1,3 @@
-import re
 def read(file):
     with open(file) as f:
         rawdata = f.readlines()
@@ -46,13 +45,6 @@ VIABLE_DIRECTIONS = { #if i was going north, viable directions are | F and 7
 	'W': ['-', 'L', 'F']
 }
 
-OPPOSITE_DIRECTIONS =  {
-	'N':'S',
-	'S':'N',
-	'E': 'W',
-	'W': 'E'
-}
-
 def find_start(grid):
 	for y in range(0, len(grid)):
 		if 'S' in grid[y]:
@@ -76,17 +68,12 @@ def find_starting_path(grid,x,y):
 def main(file):
 	grid = read(file)
 	xstart, ystart = find_start(grid)
-	print(xstart, ystart)
 	dir, y,x = find_starting_path(grid,xstart, ystart)
-	print(x,y,dir)
 	counter = 1
 	while grid[y][x] != 'S':
 		x,y,dir = move(grid, x,y,dir)
-		
-		print(x, y, dir)
 		counter +=1
 	print(counter//2)
-	print(grid)
 
 
 
